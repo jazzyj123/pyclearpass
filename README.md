@@ -54,7 +54,7 @@ Run the following in a command line terminal to install the pip package - ```pip
 
 #### Method 3 - Installing Package from Github (using Git.exe)
 1. Install Git for your Operating System from https://git-scm.com/download
-2. Run the following in a command line terminal to install the pip package - ```pip3 install git+https://github.com/aruba/pyclearpass``` or ```pip install git+https://github.com/aruba/pyclearpass```. This may vary between Operating Systems.
+2. Run the following in a command line terminal to install the pip package - ```pip3 install git+https://github.com/aruba/pyclearpass``` or ```pip install git+https://github.com/aruba/pyclearpass```. This may vary between Operating Systems. Note - whilst the repository is located on jazzyj123, you will need to install using ``pip3 install git+https://github.com/jazzyj123/pyclearpass``` or ```pip install git+https://github.com/jazzyj123/pyclearpass```.
 
 ## Inital Usage Instructions
 Within your Python favourite IDE enivronment, create an import reference
