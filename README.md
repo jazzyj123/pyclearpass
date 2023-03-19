@@ -138,7 +138,7 @@ print(apiPolicyElements.deleteEnforcementPolicyByEnforcement_policy_id(login,enf
 
 ```
 
-#### Create a new Enforcement Policy with staged initial rules and then a loop to create existing rules. 
+#### Create a new Enforcement Policy with staged initial rules and then a loop to create additional rules. 
 ```
 newEnforcementPolicy= {
   "name": "MPSK Demo",
@@ -187,4 +187,33 @@ for id in range(9,11):
 newEnforcementPolicy["rules"] = newEnforcementPolicyRules["rules"]
 print(apiPolicyElements.newEnforcementPolicy(login,body=newEnforcementPolicy))
 
+```
+
+#### Update an existing Enforcement Policy, retaining the original items
+```
+epol = apiPolicyElements.getEnforcementPolicyNameByName(login, name="MPSK Enforcement")
+OriginalRules = epol["rules"]
+CombinedRules =({"rules":[]})
+for item in range(len(OriginalRules)):
+    CombinedRules["rules"].append(OriginalRules[item])
+
+for x in range(9,11):
+    epf ={
+            "enforcement_profile_names": [
+                "MPSK with Simple Pass - 33333333"
+
+            ],
+            "condition": [
+                {
+                    "type": "Connection",
+                    "name": "AP-Name",
+                    "oper": "BEGINS_WITH",
+                    "value": "APNo"+str(x)
+                }
+            ]
+        }
+    
+    CombinedRules["rules"].append(epf)  
+
+apiPolicyElements.updateEnforcementPolicyNameByName(login,name="MPSK Enforcement",body=CombinedRules)
 ```
