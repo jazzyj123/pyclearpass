@@ -198,8 +198,8 @@ CombinedRules =({"rules":[]})
 for item in range(len(OriginalRules)):
     CombinedRules["rules"].append(OriginalRules[item])
 
-for x in range(9,11):
-    epf ={
+for no in range(9,11):
+    rule ={
             "enforcement_profile_names": [
                 "Sample Enforcement Policy"
 
@@ -209,12 +209,12 @@ for x in range(9,11):
                     "type": "Connection",
                     "name": "AP-Name",
                     "oper": "BEGINS_WITH",
-                    "value": "APNo"+str(x)
+                    "value": "APNo"+str(no)
                 }
             ]
         }
     
-    CombinedRules["rules"].append(epf)  
+    CombinedRules["rules"].append(rule)  
 
 apiPolicyElements.updateEnforcementPolicyNameByName(login,name="MPSK Enforcement",body=CombinedRules)
 ```
