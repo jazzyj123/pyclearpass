@@ -188,7 +188,7 @@ newEnforcementPolicy["rules"] = newEnforcementPolicyRules["rules"]
 print(apiPolicyElements.newEnforcementPolicy(login,body=newEnforcementPolicy))
 
 ```
-Note - xx
+Note - xx```
 
 #### Update an existing Enforcement Policy, retaining the original items and using a loop to add additional items 
 ```
