@@ -189,7 +189,7 @@ print(apiPolicyElements.newEnforcementPolicy(login,body=newEnforcementPolicy))
 
 ```
 
-#### Update an existing Enforcement Policy, retaining the original items
+#### Update an existing Enforcement Policy, retaining the original items and using a loop to add additional items 
 ```
 epol = apiPolicyElements.getEnforcementPolicyNameByName(login, name="MPSK Enforcement")
 OriginalRules = epol["rules"]
@@ -200,7 +200,7 @@ for item in range(len(OriginalRules)):
 for x in range(9,11):
     epf ={
             "enforcement_profile_names": [
-                "MPSK with Simple Pass - 33333333"
+                "Sample Enforcement Policy"
 
             ],
             "condition": [
