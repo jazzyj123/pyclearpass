@@ -152,7 +152,7 @@ newEnforcementPolicyRules =({"rules":[]})
 
 initialrule = {
             "enforcement_profile_names": [
-                "MPSK with Simple Pass - 33333333"
+                "Sample Enforcement Policy"
             ],
             "condition": [
                 {
@@ -188,6 +188,7 @@ newEnforcementPolicy["rules"] = newEnforcementPolicyRules["rules"]
 print(apiPolicyElements.newEnforcementPolicy(login,body=newEnforcementPolicy))
 
 ```
+Note - xx
 
 #### Update an existing Enforcement Policy, retaining the original items and using a loop to add additional items 
 ```
