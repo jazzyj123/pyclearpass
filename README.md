@@ -188,7 +188,7 @@ newEnforcementPolicy["rules"] = newEnforcementPolicyRules["rules"]
 print(apiPolicyElements.newEnforcementPolicy(login,body=newEnforcementPolicy))
 
 ```
->Note - you may find it easier to initially pull a working Enforcement policy with minimal rules before trying to create a new one from scratch. For example, the rule evaluation in the GUI shows as 'First applicable', however in the backend it is shown as 'first-applicable'. This example is a working policy.
+>Note - you may find it easier to initially pull a working Enforcement Policy with minimal rules before trying to create a new one from scratch. For example, the rule evaluation in the GUI shows as 'First applicable', however in the backend it is shown as 'first-applicable'. This example is a working policy. It is demonstrated with a loop which could read an entry in a CSV file if adapted. 
 
 #### Update an existing Enforcement Policy, retaining the original items and using a loop to add additional items 
 ```
