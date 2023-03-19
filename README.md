@@ -69,7 +69,7 @@ It grabs it once for the session and uses the same token through the execution o
 
 ```
 login = ClearPassAPILogin(server="https://yourserver.network.local:443/api",granttype="client_credentials",
-clientsecret="clientsecret", clientid="clientid", verifySSL=False)
+clientsecret="myclientsecretexample", clientid="myclientidexample", verifySSL=False)
 ```
 Find an API you want to use, by prefixing  ```api```  in your IDE and intellisense will show the available APIs available. Each of the top level API category names are available as a module. Once you have chosen a specifc API to use, for example apiPolicyElements, it will show you the available methods if you suffix a . to the command - ```apiPolicyElements.```
 
@@ -130,4 +130,61 @@ print(apiPolicyElements.newRole(login,body=role))
 #### Delete Role
 ```
 print(apiPolicyElements.deleteRoleNameByName(login,name='Demo'))
+```
+
+#### Delete an Enforcement Policy
+```
+print(apiPolicyElements.deleteEnforcementPolicyByEnforcement_policy_id(login,enforcement_policy_id='3058'))
+
+```
+
+#### Create a new Enforcement Policy with staged initial rules and then a loop to create existing rules. 
+```
+newEnforcementPolicy= {
+  "name": "MPSK Demo",
+  "description": "MPSK Enforcement",
+  "enforcement_type": "RADIUS",
+  "default_enforcement_profile": "Deny Device",
+  "rule_eval_algo": "first-applicable",
+  "rules": ''}
+
+newEnforcementPolicyRules =({"rules":[]})
+
+initialrule = {
+            "enforcement_profile_names": [
+                "MPSK with Simple Pass - 33333333"
+            ],
+            "condition": [
+                {
+                    "type": "Connection",
+                    "name": "AP-Name",
+                    "oper": "BEGINS_WITH",
+                    "value": "APDemo"
+                }
+            ]
+        }
+newEnforcementPolicyRules["rules"].append(initialrule)
+
+for id in range(9,11):
+    randompsk = random.randint(8000000,9000000)
+    epf ={
+            "enforcement_profile_names": [
+                "Sample Enforcement Policy"
+
+            ],
+            "condition": [
+                {
+                    "type": "Connection",
+                    "name": "AP-Name",
+                    "oper": "BEGINS_WITH",
+                    "value": "APNo"+str(id)
+                }
+            ]
+        }
+    
+    newEnforcementPolicyRules["rules"].append(epf) 
+ 
+newEnforcementPolicy["rules"] = newEnforcementPolicyRules["rules"]
+print(apiPolicyElements.newEnforcementPolicy(login,body=newEnforcementPolicy))
+
 ```
