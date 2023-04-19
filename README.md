@@ -69,21 +69,21 @@ It grabs it once for the session and uses the same token through the execution o
 
 ```
 login = ClearPassAPILogin(server="https://yourserver.network.local:443/api",granttype="client_credentials",
-clientsecret="myclientsecretexample", clientid="myclientidexample", verifySSL=False)
+clientsecret="myclientsecretexample", clientid="myclientidexample", verify_ssl=False)
 ```
 Find an API you want to use, by prefixing  ```api```  in your IDE and intellisense will show the available APIs available. Each of the top level API category names are available as a module. Once you have chosen a specifc API to use, for example apiPolicyElements, it will show you the available methods if you suffix a . to the command - ```apiPolicyElements.```
 
 The example below prints the roles available within the clearpass server.
 ```	
-print(apiPolicyElements.getRole(login)) 
+print(ApiPolicyElements.get_role(login)) 
 ```
 By default, the example above to return the roles available within the clearpass server will only show the first 25 roles. If you want to view more, you have to adjust the limit. Placing your cursor over the .getRole will usually show you help about the method. 
 ```
-print(apiPolicyElements.getRole(login, limit=100))
+print(ApiPolicyElements.get_role(login, limit=100))
 ```
 ## Help 
-Once you have written a specific API  ```apiName.FunctionName(```, placing your cursor over the command will show you help for the function and what the required parameters are (example is Visual Studio Code). The first parameter is always login. 
-You may also read the help for the function by calling ```help(apiName.FunctionName)```. Each function contains a help section on how to use it. 
+Once you have written a specific API  ```ApiName.FunctionName(```, placing your cursor over the command will show you help for the function and what the required parameters are (example is Visual Studio Code). The first parameter is always login. 
+You may also read the help for the function by calling ```help(ApiName.FunctionName)```. Each function contains a help section on how to use it. 
 ## Python Package Upgrade Instructions
 Once an update is available on the Python PyPi repository, you may upgrade your release by completing the following in a command line terminal - ```pip3 install pyclearpass --upgrade```
 ## Uninstall Package Package
@@ -92,22 +92,22 @@ To remove the Python pyclearpass package, type the following command into a comm
 ## Further Usage Examples
 #### Get Local Server Configuration 
 ```
-LSCGCS = apiLocalServerConfiguration.getClusterServer(login)
+LSCGCS = ApiLocalServerConfiguration.get_cluster_server(login)
 print(json.dumps(LSCGCS['_embedded']['items'],indent=1))
 ```
 #### Get Total End Point Count 
 ```
-IGEP = apiIdentities.getEndpoint(login, calculate_count='true')
+IGEP = ApiIdentities.get_endpoint(login, calculate_count='true')
 print("Total MACs in Table: "+str(IGEP['count']))
 ```
 #### Get Insight Device Details
 ```
-print(apiLogs.getInsightEndpointIpByIp(login,ip="192.168.0.99"))
+print(ApiLogs.get_insight_endpoint_ip_by_ip(login,ip="192.168.0.99"))
 ```
 
 #### Get list of Admin Users
 ```
-AU = apiGlobalServerConfiguration.getAdminUser(login)
+AU = ApiGlobalServerConfiguration.get_admin_user(login)
 for users in AU['_embedded']['items']:
   print(users)
 ```
@@ -119,22 +119,22 @@ newEndPoint = {
   "description": "Demo EndPoint 1",
   "status": "Known"
 }
-print(apiIdentities.newEndpoint(login,body=newEndPoint))
+print(ApiIdentities.new_endpoint(login,body=newEndPoint))
 ```
 #### Add New Role
 ```
 role={"name": "Test1","description": "Test role made using the API Package in Python"}
-print(apiPolicyElements.newRole(login,body=role))
+print(ApiPolicyElements.new_role(login,body=role))
 ```
 
 #### Delete Role
 ```
-print(apiPolicyElements.deleteRoleNameByName(login,name='Demo'))
+print(ApiPolicyElements.delete_role_name_by_name(login,name='Demo'))
 ```
 
 #### Delete an Enforcement Policy
 ```
-print(apiPolicyElements.deleteEnforcementPolicyByEnforcement_policy_id(login,enforcement_policy_id='3058'))
+print(ApiPolicyElements.delete_enforcement_policy_by_enforcement_policy_id(login,enforcement_policy_id='3058'))
 
 ```
 
@@ -185,14 +185,14 @@ for id in range(9,11):
     newEnforcementPolicyRules["rules"].append(epf) 
  
 newEnforcementPolicy["rules"] = newEnforcementPolicyRules["rules"]
-print(apiPolicyElements.newEnforcementPolicy(login,body=newEnforcementPolicy))
+print(ApiPolicyElements.new_enforcement_policy(login,body=newEnforcementPolicy))
 
 ```
 >Note - you may find it easier to initially pull a working Enforcement Policy with minimal rules before trying to create a new one from scratch. For example, the rule evaluation in the GUI shows as 'First applicable', however in the backend it is shown as 'first-applicable'. This example is a working policy. It is demonstrated with a loop which could read an entry in a CSV file if adapted. 
 
 #### Update an existing Enforcement Policy, retaining the original items and using a loop to add additional items 
 ```
-epol = apiPolicyElements.getEnforcementPolicyNameByName(login, name="MPSK Enforcement")
+epol = ApiPolicyElements.get_enforcement_policy_name_by_name(login, name="MPSK Enforcement")
 OriginalRules = epol["rules"]
 CombinedRules =({"rules":[]})
 for item in range(len(OriginalRules)):
@@ -216,5 +216,5 @@ for no in range(9,11):
     
     CombinedRules["rules"].append(rule)  
 
-apiPolicyElements.updateEnforcementPolicyNameByName(login,name="MPSK Enforcement",body=CombinedRules)
+ApiPolicyElements.update_enforcement_policy_name_by_name(login,name="MPSK Enforcement",body=CombinedRules)
 ```
