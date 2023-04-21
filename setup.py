@@ -21,7 +21,7 @@ setup(
 	"Intended Audience :: Deplyoment Engineers",
     "Topic :: System :: Networking",
     "Natural Language :: English",],
-    project_urls={"Source": "https://github.com/jazzyj123/pyedgeconnect/"},
+    project_urls={"Source": "https://github.com/jazzyj123/pyclearpass/"},
     keywords="Aruba, Aruba ClearPass, Aruba CPPM, CPPM, pyclearpass"
 
 )
