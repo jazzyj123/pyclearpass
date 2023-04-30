@@ -152,7 +152,7 @@ new_guest_device = {
   "expire_time": int(time.time()) + 86400,
   "mac": "11:22:22:33:33:11",
   "notes": "Created by API Test Script",
-  "role_id": 2,
+  "role_id": 3,
   "sponsor_profile_name": "Super Administrator",
   "visitor_name": "API Test Device",
   "mpsk":"SecretPassword",
