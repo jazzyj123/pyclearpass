@@ -90,6 +90,13 @@ Once an update is available on the Python PyPi repository, you may upgrade your 
 To remove the Python pyclearpass package, type the following command into a command line terminal - ```pip3 uninstall pyclearpass ``` or ```pip uninstall pyclearpass ```
 
 ## Further Usage Examples
+The examples below all exclude importing the module and creating the login variable. An example is shown below
+```
+from pyclearpass import *
+login = ClearPassAPILogin(server="https://yourserver.network.local:443/api",granttype="client_credentials",
+clientsecret="myclientsecretexample", clientid="myclientidexample", verify_ssl=False)
+```
+
 #### Get Local Server Configuration 
 ```
 LSCGCS = ApiLocalServerConfiguration.get_cluster_server(login)
@@ -130,6 +137,33 @@ print(ApiPolicyElements.new_role(login,body=role))
 #### Delete Role
 ```
 print(ApiPolicyElements.delete_role_name_by_name(login,name='Demo'))
+```
+
+
+#### Add New Guest Device 
+```
+import time
+new_guest_device = {
+  "enabled": True,
+  "expire_time": int(time.time()) + 86400, #+24 hours in seconds
+  "mac": "11:22:22:33:33:11",
+  "notes": "Created by API Test Script",
+  "role_id": 2,
+  "sponsor_profile_name": "Super Administrator",
+  "visitor_name": "API Test Device",
+  "mpsk":"SecretPassword",
+  "mpsk_enable":"1"
+}
+new_device= ApiIdentities.new_device(login,body=new_guest_device)
+print(new_device)
+```
+
+#### Get Guest Device by MAC
+```
+import json
+get_mac_address = "11-22-33-33-22-11"
+view_guest_device = ApiIdentities.get_device_mac_by_macaddr(login,get_mac_address)
+print(json.dumps(view_guest_device,indent=2))
 ```
 
 #### Delete an Enforcement Policy
