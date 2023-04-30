@@ -57,7 +57,7 @@ Run the following in a command line terminal to install the pip package - ```pip
 2. Run the following in a command line terminal to install the pip package - ```pip3 install git+https://github.com/aruba/pyclearpass``` or ```pip install git+https://github.com/aruba/pyclearpass```. This may vary between Operating Systems. 
 Note - whilst the repository is located on jazzyj123, you will need to install using ```pip3 install git+https://github.com/jazzyj123/pyclearpass``` or ```pip install git+https://github.com/jazzyj123/pyclearpass```.
 
-## Inital Usage Instructions
+# Inital Usage Instructions
 Within your Python favourite IDE enivronment, create an import reference
 ```
 from pyclearpass import *
@@ -81,15 +81,15 @@ By default, the example above to return the roles available within the clearpass
 ```
 print(ApiPolicyElements.get_role(login, limit=100))
 ```
-## Help 
+# Help 
 Once you have written a specific API  ```ApiName.FunctionName(```, placing your cursor over the command will show you help for the function and what the required parameters are (example is Visual Studio Code). The first parameter is always login. 
 You may also read the help for the function by calling ```help(ApiName.FunctionName)```. Each function contains a help section on how to use it. 
-## Python Package Upgrade Instructions
+# Python Package Upgrade Instructions
 Once an update is available on the Python PyPi repository, you may upgrade your release by completing the following in a command line terminal - ```pip3 install pyclearpass --upgrade```
-## Uninstall Package Package
+# Uninstall Package Package
 To remove the Python pyclearpass package, type the following command into a command line terminal - ```pip3 uninstall pyclearpass ``` or ```pip uninstall pyclearpass ```
 
-## Further Usage Examples
+# Further Usage Examples
 The examples below all exclude importing the module and creating the login variable. An example is shown below
 ```
 from pyclearpass import *
@@ -97,29 +97,29 @@ login = ClearPassAPILogin(server="https://yourserver.network.local:443/api",gran
 clientsecret="myclientsecretexample", clientid="myclientidexample", verify_ssl=False)
 ```
 
-#### Get Local Server Configuration 
+## Get Local Server Configuration 
 ```
 LSCGCS = ApiLocalServerConfiguration.get_cluster_server(login)
 print(json.dumps(LSCGCS['_embedded']['items'],indent=1))
 ```
-#### Get Total End Point Count 
+## Get Total End Point Count 
 ```
 IGEP = ApiIdentities.get_endpoint(login, calculate_count='true')
 print("Total MACs in Table: "+str(IGEP['count']))
 ```
-#### Get Insight Device Details
+## Get Insight Device Details
 ```
 print(ApiLogs.get_insight_endpoint_ip_by_ip(login,ip="192.168.0.99"))
 ```
 
-#### Get list of Admin Users
+## Get list of Admin Users
 ```
 AU = ApiGlobalServerConfiguration.get_admin_user(login)
 for users in AU['_embedded']['items']:
   print(users)
 ```
 
-#### Add New Endpoint
+## Add New Endpoint
 ```
 newEndPoint = {
   "mac_address": "11:22:33:44:55:66",
@@ -128,24 +128,28 @@ newEndPoint = {
 }
 print(ApiIdentities.new_endpoint(login,body=newEndPoint))
 ```
-#### Add New Role
+## Add New Role
 ```
 role={"name": "Test1","description": "Test role made using the API Package in Python"}
 print(ApiPolicyElements.new_role(login,body=role))
 ```
 
-#### Delete Role
+## Delete Role
 ```
 print(ApiPolicyElements.delete_role_name_by_name(login,name='Demo'))
 ```
 
 
-#### Add New Guest Device 
+## Add New Guest Device 
+This example adds a Guest Device including 
+1. an expiry date within 24 hours in seconds 
+2. associated to the role ID of 2 (Guest in test environment)
+3. Statically assigned MPSK password
 ```
 import time
 new_guest_device = {
   "enabled": True,
-  "expire_time": int(time.time()) + 86400, #+24 hours in seconds
+  "expire_time": int(time.time()) + 86400,
   "mac": "11:22:22:33:33:11",
   "notes": "Created by API Test Script",
   "role_id": 2,
