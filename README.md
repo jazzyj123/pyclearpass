@@ -162,6 +162,11 @@ new_device= ApiIdentities.new_device(login,body=new_guest_device)
 print(new_device)
 ```
 
+Output be returned in JSON confirming the creating of the Guest Device
+```
+{'id': '3057', 'username': '11-22-22-33-33-11', 'start_time': 1682887610, 'expire_time': 1682974017, 'sponsor_name': 'oauth2:test2', 'sponsor_profile': '1', 'enabled': True, 'current_state': 'active', 'notes': 'Created by API Test Script', 'role_name': 'Guest', 'role_id': 2, 'mac': '11-22-22-33-33-11', 'mac_auth': True, 'source': 'api', 'create_time': 1682887610, 'mpsk_enable': '1', 'visitor_name': 'API Test Device', 'sponsor_profile_name': 'Super Administrator', 'mpsk': 'SecretPassword', '_links': {'self': {'href': 'https://cppm1.ruddit.co.uk/api/device/3057'}}}
+```
+
 ## Get Guest Device by MAC
 ```
 import json
