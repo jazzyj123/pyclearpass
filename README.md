@@ -162,7 +162,7 @@ new_device= ApiIdentities.new_device(login,body=new_guest_device)
 print(new_device)
 ```
 
-#### Get Guest Device by MAC
+## Get Guest Device by MAC
 ```
 import json
 get_mac_address = "11-22-33-33-22-11"
@@ -170,13 +170,13 @@ view_guest_device = ApiIdentities.get_device_mac_by_macaddr(login,get_mac_addres
 print(json.dumps(view_guest_device,indent=2))
 ```
 
-#### Delete an Enforcement Policy
+## Delete an Enforcement Policy
 ```
 print(ApiPolicyElements.delete_enforcement_policy_by_enforcement_policy_id(login,enforcement_policy_id='3058'))
 
 ```
 
-#### Create a new Enforcement Policy with staged initial rules and then a loop to create additional rules. 
+## Create a new Enforcement Policy with staged initial rules and then a loop to create additional rules. 
 ```
 newEnforcementPolicy= {
   "name": "MPSK Demo",
@@ -228,7 +228,7 @@ print(ApiPolicyElements.new_enforcement_policy(login,body=newEnforcementPolicy))
 ```
 >Note - you may find it easier to initially pull a working Enforcement Policy with minimal rules before trying to create a new one from scratch. For example, the rule evaluation in the GUI shows as 'First applicable', however in the backend it is shown as 'first-applicable'. This example is a working policy. It is demonstrated with a loop which could read an entry in a CSV file if adapted. 
 
-#### Update an existing Enforcement Policy, retaining the original items and using a loop to add additional items 
+## Update an existing Enforcement Policy, retaining the original items and using a loop to add additional items 
 ```
 epol = ApiPolicyElements.get_enforcement_policy_name_by_name(login, name="MPSK Enforcement")
 OriginalRules = epol["rules"]
