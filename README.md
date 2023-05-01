@@ -145,8 +145,8 @@ print(ApiPolicyElements.delete_role_name_by_name(login,name='Demo'))
 
 ## Add New Guest Device 
 This example adds a Guest Device including 
-1. an expiry date within 24 hours in seconds 
-2. associated to the role ID of 2 (Guest in test environment)
+1. An expiry date within 24 hours in seconds 
+2. Associated to the role ID of 3 (Guest in test environment)
 3. Statically assigned MPSK password
 ```
 import time
